@@ -39,7 +39,8 @@ namespace MovieLibraryEntities.Dao
                 .Include(x => x.MovieGenres)
                 .ThenInclude(x => x.Genre)
                 .OrderBy(x => x.Title)
-                .Take(amount);
+                .Take(amount)
+                .ToList();
 
             return allMovies;
         }

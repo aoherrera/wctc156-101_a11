@@ -29,7 +29,9 @@ public class MainService : IMainService
             choice = Console.ReadLine();
             Console.WriteLine();
 
-            if (choice == "1")
+            if (choice == "7")
+                break;
+            else if (choice == "1")
             {
                 {
                     string userMovie;
@@ -210,70 +212,18 @@ public class MainService : IMainService
                 if (seeAll == 'Y')
                 {
                     var movies = _repository.GetAll();
-                    for (int i = 0; i < movies.Count(); i++)
+                    foreach (var movie in movies)
                     {
-                        var movieGenres = movies.ElementAt(i)?.MovieGenres ?? new List<MovieGenre>();
-
-                        if (i <= (movies.Count() - 1))
-                        {
-                            Console.WriteLine($"\nMovie ID: {movies.ElementAt(i).Id}");
-                            Console.WriteLine($"Title (Release Year): {movies.ElementAt(i).Title}");
-                        }
-                        else if (i == (movies.Count() - 1) && movieGenres.Count == 0)
-                        {
-                            Console.WriteLine($"\nMovie ID: {movies.ElementAt(i).Id}");
-                            Console.WriteLine($"Title (Release Year): {movies.ElementAt(i).Title}\n");
-                        }
-
-                        //display genre(s)
-                        if (movieGenres.Count() != 0)
-                        {
-                            Console.Write("Genre(s): ");
-                            for (int j = 0; j < movieGenres.Count(); j++)
-                            {
-                                if (j != (movieGenres.Count() - 1))
-                                {
-                                    Console.Write($"{movieGenres.ElementAt(j).Genre.Name}, ");
-                                }
-                                else
-                                    Console.WriteLine($"{movieGenres.ElementAt(j).Genre.Name}\n");
-                            }
-                        }
+                        _repository.DisplayMovieDetails(Convert.ToInt32(movie.Id));
                     }
                 }
                 else
                 {
                     var amountToSee = Helper.GetIntInRange("How many movie records would you like to see (sorted alphabetically)?", 0, _repository.GetAll().Count());
                     var movies = _repository.GetTopMovies(amountToSee);
-                    for (int i = 0; i < movies.Count(); i++)
+                    foreach (var movie in movies)
                     {
-                        var movieGenres = movies.ElementAt(i)?.MovieGenres ?? new List<MovieGenre>();
-
-                        if (i <= (movies.Count() - 1))
-                        {
-                            Console.WriteLine($"\nMovie ID: {movies.ElementAt(i).Id}");
-                            Console.WriteLine($"Title (Release Year): {movies.ElementAt(i).Title}");
-                        }
-                        else if (i == (movies.Count() - 1) && movieGenres.Count == 0)
-                        {
-                            Console.WriteLine($"\nMovie ID: {movies.ElementAt(i).Id}");
-                            Console.WriteLine($"Title (Release Year): {movies.ElementAt(i).Title}\n");
-                        }
-
-                        //display genre(s)
-                        if (movieGenres.Count() != 0)
-                        {
-                            Console.Write("Genre(s): ");
-                            for (int j = 0; j < movieGenres.Count(); j++)
-                            {
-                                if (j != (movieGenres.Count() - 1))
-                                {
-                                    Console.Write($"{movieGenres.ElementAt(j).Genre.Name}, ");
-                                }
-                                else
-                                    Console.WriteLine($"{movieGenres.ElementAt(j).Genre.Name}\n");
-                            }
-                        }
+                        _repository.DisplayMovieDetails(Convert.ToInt32(movie.Id));
                     }
                 }
             }
@@ -552,14 +502,9 @@ public class MainService : IMainService
 
                     if (movies.Any())
                     {
-                        for (int i = 0; i < movies.Count(); i++)
+                        foreach (var movie in movies)
                         {
-                            _repository.DisplayMovieDetails(Convert.ToInt32(movies.ElementAt(i).Id));
-
-                            if (i != movies.Count() - 1)
-                            {
-                                Console.WriteLine();
-                            }
+                            _repository.DisplayMovieDetails(Convert.ToInt32(movie.Id));
                         }
                         var searchAgain = Helper.YesNo("\nWould you like to search again (Y/N)?");
                         if (searchAgain == 'Y')
@@ -620,12 +565,8 @@ public class MainService : IMainService
                 }
 
             }
-            else if (choice == "7")
-                break;
-
             else
                 Console.WriteLine("Please enter a valid selection.\n");
-
         } while (choice != "7");
     }
 }
