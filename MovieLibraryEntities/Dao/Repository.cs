@@ -57,6 +57,17 @@ namespace MovieLibraryEntities.Dao
             return temp;
         }
 
+        public IEnumerable<Movie> SearchByReleaseYear(int releaseYear)
+        {
+            var allMovies = _context.Movies
+            .Include(x => x.MovieGenres)
+            .ThenInclude(x => x.Genre);
+            var listOfMovies = allMovies.ToList();
+
+            var temp = listOfMovies.Where(x => x.ReleaseDate.Year == releaseYear);
+            return temp;
+        }
+
         public void AddMovie(string movieTitle, DateTime releaseDate, string releaseYear, List<int>? movieGenres)
         {
             var movie = new Movie()
@@ -141,11 +152,6 @@ namespace MovieLibraryEntities.Dao
             else
                 //movie is default(Movie); FirstOrDefault returns default(Type)
                 return false;
-        }
-
-        public IEnumerable<Movie> SearchByReleaseYear(int releaseYear)
-        {
-            return _context.Movies.Where(x => x.ReleaseDate.Year == releaseYear);
         }
 
         //Get a listing of avaialble movie genres in the Genres table.

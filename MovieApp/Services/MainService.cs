@@ -107,36 +107,9 @@ public class MainService : IMainService
                     var movies = _repository.SearchByReleaseYear(releaseYear);
                     if (movies.Any())
                     {
-                        for (int i = 0; i < movies.Count(); i++)
+                        foreach (var movie in movies)
                         {
-                            var movieGenres = movies.ElementAt(i)?.MovieGenres ?? new List<MovieGenre>();
-
-                            if (i <= (movies.Count() - 1))
-                            {
-                                Console.WriteLine($"\nMovie ID: {movies.ElementAt(i).Id}");
-                                Console.WriteLine($"Title (Release Year): {movies.ElementAt(i).Title}");
-                            }
-                            else if (i == (movies.Count() - 1) && movieGenres.Count == 0)
-                            {
-                                Console.WriteLine($"\nMovie ID: {movies.ElementAt(i).Id}");
-                                Console.WriteLine($"Title (Release Year): {movies.ElementAt(i).Title}\n");
-                            }
-
-                            //display genre(s)
-                            if (movieGenres.Count() != 0)
-                            {
-                                Console.Write("Genre(s): ");
-                                for (int j = 0; j < movieGenres.Count(); j++)
-                                {
-                                    if (j != (movieGenres.Count() - 1))
-                                    {
-                                        Console.Write($"{movieGenres.ElementAt(j).Genre.Name}, ");
-                                    }
-                                    else
-                                        Console.WriteLine($"{movieGenres.ElementAt(j).Genre.Name}\n");
-                                }
-                            }
-
+                            _repository.DisplayMovieDetails(Convert.ToInt32(movie.Id));
                         }
                     }
                     else
@@ -315,16 +288,11 @@ public class MainService : IMainService
 
                     if (movies.Any())
                     {
-                        for (int i = 0; i < movies.Count(); i++)
+                        foreach (var movie in movies)
                         {
-                            Console.WriteLine($"Movie ID: {movies.ElementAt(i).Id}");
-                            Console.WriteLine($"Title (Release Year): {movies.ElementAt(i).Title}.");
-
-                            if (i != movies.Count() - 1)
-                            {
-                                Console.WriteLine();
-                            }
+                            _repository.DisplayMovieDetails(Convert.ToInt32(movie.Id));
                         }
+
                         var searchAgain = Helper.YesNo("\nWould you like to search again (Y/N)?");
                         if (searchAgain == 'Y')
                             continue;
@@ -341,11 +309,12 @@ public class MainService : IMainService
                             break;
                     }
                 }
+
                 //flag variable to check if movie has been updated.
                 bool movieUpdated = false;
                 do
                 {
-                    Console.WriteLine("Enter the movie ID for the movie you woud like to update.");
+                    Console.WriteLine("\nEnter the movie ID for the movie you woud like to update.");
                     var userMovie = Console.ReadLine();
                     int movieID;
                     try
