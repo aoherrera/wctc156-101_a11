@@ -1,18 +1,33 @@
 ﻿<Properties StartupConfiguration="{231FD08C-453B-43ED-B4A3-41DF46087BED}|Default">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.MovieApp PreferredExecutionTarget="MonoDevelop.Default" />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="MovieApp/Services/MainService.cs">
+    <Files>
+      <File FileName="MovieApp/Services/MainService.cs" Line="427" Column="66" />
+      <File FileName="MovieLibraryEntities/Dao/Repository.cs" Line="111" Column="58" />
+      <File FileName="MovieLibraryEntities/Dao/IRepository.cs" Line="19" Column="14" />
+      <File FileName="MovieApp/Services/Helper.cs" Line="1" Column="1" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="MovieApp" expanded="True" selected="True" />
+          <Node name="MovieApp">
+            <Node name="MovieApp">
+              <Node name="Services">
+                <Node name="MainService.cs" selected="True" />
+              </Node>
+            </Node>
+            <Node name="MovieLibraryEntities">
+              <Node name="Models" expanded="True" />
+            </Node>
+          </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.MovieApp PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>

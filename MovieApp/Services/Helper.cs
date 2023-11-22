@@ -11,8 +11,7 @@ namespace MovieApp.Services
         public static string GetYear(string prompt)
         {
             var yearPattern = @"^(19|20)\d{2}$";
-            var thisYear = DateTime.Now.Year;
-
+            var thisYear = DateTime.UtcNow.Year;
 
             while (true)
             {
@@ -31,7 +30,7 @@ namespace MovieApp.Services
                         "following format: YYYY (e.g., 1999).\n");
                     continue;
                 }
-                if (Regex.Match(userInput, yearPattern).Success && userYear >= 1800 && (userYear < thisYear + 1))
+                if (Regex.Match(userInput, yearPattern).Success && userYear >= 1900 && (userYear < thisYear + 1))
                 {
                     return userInput;
                 }
@@ -44,6 +43,7 @@ namespace MovieApp.Services
             }
 
         }
+
         //Convert a string into Title Case, in which the first letter of each word is capitalized.
         public static string ConvertTitle(string text)
         {
@@ -58,6 +58,7 @@ namespace MovieApp.Services
             return finalText;
         }
 
+        //Get an integer within a certain range.
         public static int GetIntInRange(string prompt, int bottom, int top)
         {
             while (true)
@@ -76,6 +77,25 @@ namespace MovieApp.Services
                 catch
                 {
                     Console.WriteLine($"Please enter a valid number between {bottom} and {top}.");
+                }
+            }
+        }
+
+        public static char YesNo(string prompt)
+        {
+            while (true)
+            {
+                Console.WriteLine(prompt);
+                var userEntry = Console.ReadLine();
+                try
+                {
+                    var userAnswer = Char.ToUpper(Convert.ToChar(userEntry));
+                    if (userAnswer == 'Y' || userAnswer == 'N')
+                        return userAnswer;
+                }
+                catch
+                {
+                    Console.WriteLine("You must enter either 'Y' for yes or 'N' for no.");
                 }
             }
         }
